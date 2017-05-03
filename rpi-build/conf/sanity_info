@@ -1,0 +1,4 @@
+SANITY_VERSION 1
+TMPDIR /home/skn/development/heat/yocto-projects/rpi-build/tmp
+SSTATE_DIR /home/skn/development/heat/yocto-projects/rpi-build/sstate-cache
+NATIVELSBSTRING ubuntu-14.04
