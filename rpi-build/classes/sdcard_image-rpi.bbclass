@@ -110,7 +110,7 @@ IMAGE_CMD_rpi-sdimg () {
 		for DTB in $DT_ROOT; do
 			DTB_BASE_NAME=`basename ${DTB} .dtb`
 
-			mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTB_BASE_NAME}.dtb ::${DTB_BASE_NAME}.dtb
+			mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/Image.gz-${DTB_BASE_NAME}.dtb ::${DTB_BASE_NAME}.dtb
 		done
 
 		# Copy device tree overlays to dedicated folder
@@ -119,7 +119,7 @@ IMAGE_CMD_rpi-sdimg () {
 				DTB_EXT=${DTB##*.}
 				DTB_BASE_NAME=`basename ${DTB} ."${DTB_EXT}"`
 
-			mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTB_BASE_NAME}.${DTB_EXT} ::overlays/${DTB_BASE_NAME}.${DTB_EXT}
+			mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/Image.gz-${DTB_BASE_NAME}.${DTB_EXT} ::overlays/${DTB_BASE_NAME}.${DTB_EXT}
 		done
 	fi
 	case "${KERNEL_IMAGETYPE}" in
