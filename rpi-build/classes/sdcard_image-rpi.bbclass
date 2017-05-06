@@ -57,6 +57,7 @@ IMAGE_DEPENDS_rpi-sdimg = " \
 			virtual/kernel:do_deploy \
 			${IMAGE_BOOTLOADER} \
 			${@bb.utils.contains('KERNEL_IMAGETYPE', 'uImage', 'u-boot', '',d)} \
+			${@bb.utils.contains('KERNEL_IMAGETYPE', 'uImage', 'u-boot-env u-boot-env:do_deploy', '',d)} \
 			"
 
 # SD card image name
@@ -101,6 +102,7 @@ IMAGE_CMD_rpi-sdimg () {
 	rm -f ${WORKDIR}/boot.img
 	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/* ::/
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/uboot.env ::/
 	if test -n "${DTS}"; then
 		# Device Tree Overlays are assumed to be suffixed by '-overlay.dtb' (4.1.x) or by '.dtbo' (4.4.9+) string and will be put in a dedicated folder
 		DT_OVERLAYS="${@split_overlays(d, 0)}"
